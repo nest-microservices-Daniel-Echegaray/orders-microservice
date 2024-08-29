@@ -1,7 +1,17 @@
-import { Controller, ParseUUIDPipe } from '@nestjs/common';
-import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
+import {
+  Controller,
+  ParseUUIDPipe,
+} from '@nestjs/common';
+import {
+  EventPattern,
+  MessagePattern,
+  Payload,
+} from '@nestjs/microservices';
 
-import { ChangeOrderStatusDto, PaidOrderDto } from './dto';
+import {
+  ChangeOrderStatusDto,
+  PaidOrderDto,
+} from './dto';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderPaginationDto } from './dto/order-pagination.dto';
 import { OrderWithProducts } from './interfaces/order-with-products.interface';
@@ -11,7 +21,7 @@ import { OrdersService } from './orders.service';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @MessagePattern('createOrder')
+  @MessagePattern('create_order')
   async create(@Payload() createOrderDto: CreateOrderDto) {
     const order = await this.ordersService.create(createOrderDto);
     const orderWithProducts: OrderWithProducts = {
@@ -28,17 +38,17 @@ export class OrdersController {
     };
   }
 
-  @MessagePattern('findAllOrders')
+  @MessagePattern('find_all_orders')
   findAll(@Payload() orderPaginationDto: OrderPaginationDto) {
     return this.ordersService.findAll(orderPaginationDto);
   }
 
-  @MessagePattern('findOneOrder')
+  @MessagePattern('find_one_order')
   findOne(@Payload('id', ParseUUIDPipe) id: string) {
     return this.ordersService.findOne(id);
   }
 
-  @MessagePattern('changeOrderStatus')
+  @MessagePattern('change_order_status')
   changeOrderStatus(@Payload() changeOrderStatusDto: ChangeOrderStatusDto) {
     return this.ordersService.changeStatus(changeOrderStatusDto);
   }
