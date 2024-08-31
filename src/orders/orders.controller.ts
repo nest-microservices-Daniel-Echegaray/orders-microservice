@@ -1,17 +1,7 @@
-import {
-  Controller,
-  ParseUUIDPipe,
-} from '@nestjs/common';
-import {
-  EventPattern,
-  MessagePattern,
-  Payload,
-} from '@nestjs/microservices';
+import { Controller, ParseUUIDPipe } from '@nestjs/common';
+import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 
-import {
-  ChangeOrderStatusDto,
-  PaidOrderDto,
-} from './dto';
+import { ChangeOrderStatusDto, PaidOrderDto } from './dto';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderPaginationDto } from './dto/order-pagination.dto';
 import { OrderWithProducts } from './interfaces/order-with-products.interface';
